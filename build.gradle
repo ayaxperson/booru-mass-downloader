@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'me.ajax'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.ayaxperson:gelbooru-java:3226420b98'
+    implementation 'com.formdev:flatlaf:3.5.4'
+}
+
+tasks {
+    shadowJar {
+        manifest {
+            attributes["Main-Class"] = "io.github.ayaxperson.boorumassdownloader.Main"
+        }
+    }
+}
