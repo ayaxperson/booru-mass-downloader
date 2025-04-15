@@ -43,7 +43,7 @@ public class ConsoleFrame extends JFrame {
 
         pack();
 
-        final PrintOutStream printOutStream = new PrintOutStream(consoleTextArea);
+        final PrintOutStream printOutStream = new PrintOutStream(System.out, consoleTextArea);
         System.setErr(new PrintStream(printOutStream, true));
         System.setOut(new PrintStream(printOutStream, true));
     }
