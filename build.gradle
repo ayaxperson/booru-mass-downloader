@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.ayaxperson:gelbooru-java:3226420b98'
+    implementation 'com.github.ayaxperson:gelbooru-java:dfe3b8d'
     implementation 'com.formdev:flatlaf:3.5.4'
 }
 
