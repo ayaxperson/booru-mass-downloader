@@ -2,7 +2,19 @@
 
 Cute little tool to download a ton of pictures from gelbooru-based websites all at once.
 
-![Showcase](https://i.imgur.com/c7uJeGR.png)
+|   Example using pre-defined booru    |       Example using custom URL       |
+|:------------------------------------:|:------------------------------------:|
+| ![](https://i.imgur.com/c7uJeGR.png) | ![](https://i.imgur.com/ZWqFap9.png) |
+
+### FAQ
+
+#### How do I run this?
+
+See the following [thread](https://github.com/ayaxperson/booru-mass-downloader/issues/1#issuecomment-2798764842).
+
+#### I'm getting a 5XX error, what should I do?
+
+Errors in the 500-599 range respond to server-side errors, therefore the issue is most likely caused by the website you're trying to access. In some cases, they can also mean the gelbooru instance you're trying to download from has blocked API access.
 
 ### Input fields
 
