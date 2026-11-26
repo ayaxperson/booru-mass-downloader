@@ -143,7 +143,7 @@ public class Main {
         // Tags text area
         gbc.gridy++;
         gbc.fill = GridBagConstraints.BOTH;
-        customQueryParametersArea = new JTextArea();
+        customQueryParametersArea = new PlaceholderTextArea("api_key=;user_id=1");
         customQueryParametersArea.setPreferredSize(new Dimension(300, 100));
         panel.add(customQueryParametersArea, gbc);
 
@@ -156,7 +156,7 @@ public class Main {
         gbc.gridy++;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
-        tagsArea = new JTextArea();
+        tagsArea = new PlaceholderTextArea("blue_sky cloud 1girl");
         tagsArea.setPreferredSize(new Dimension(300, 100));
         panel.add(tagsArea, gbc);
 
