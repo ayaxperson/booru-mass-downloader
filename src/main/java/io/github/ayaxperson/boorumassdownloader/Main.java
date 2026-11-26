@@ -16,9 +16,7 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -323,14 +321,10 @@ public class Main {
     private String[] getTags() {
         final String tagsInput = tagsArea.getText();
 
-        final List<String> result = new ArrayList<>();
-        final String[] lines = tagsInput.split("\n");
-
-        for (final String line : lines) {
-            result.addAll(Arrays.asList(line.split("%s")));
-        }
-
-        return result.toArray(new String[0]);
+        return Arrays.stream(tagsInput.split("[\\n\\s]*"))
+                .filter(s -> !s.isBlank())
+                .distinct()
+                .toArray(String[]::new);
     }
 
     private Map<String, String> getQueryParams() {
