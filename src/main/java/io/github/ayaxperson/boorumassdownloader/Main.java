@@ -321,7 +321,7 @@ public class Main {
     private String[] getTags() {
         final String tagsInput = tagsArea.getText();
 
-        return Arrays.stream(tagsInput.split("[\\n\\s]*"))
+        return Arrays.stream(tagsInput.split("[\\n\\s]+"))
                 .filter(s -> !s.isBlank())
                 .distinct()
                 .toArray(String[]::new);
