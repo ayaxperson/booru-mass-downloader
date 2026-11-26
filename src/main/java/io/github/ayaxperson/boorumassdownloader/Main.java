@@ -19,6 +19,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -45,6 +46,7 @@ public class Main {
     private JLabel statusLabel;
     private JLabel errorLabel;
 
+    private JTextArea customQueryParametersArea;
     private JTextArea tagsArea;
 
     private JTextField booruUrlInput;
@@ -67,7 +69,7 @@ public class Main {
         Thread.currentThread().setName("UI Thread");
         frame = new JFrame("Booru Mass Downloader");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(500, 600);
         frame.setResizable(false);
 
         final JPanel panel = new JPanel(new GridBagLayout());
@@ -135,12 +137,24 @@ public class Main {
         gbc.gridy++;
         panel.add(replaceFilesCheckbox = new JCheckBox("Overwrite existing files"), gbc);
 
+        // Custom query parameters
+        gbc.gridwidth = 2;
+        gbc.gridy++;
+        panel.add(new JLabel("Custom query parameters"), gbc);
+
+        // Tags text area
+        gbc.gridy++;
+        gbc.fill = GridBagConstraints.BOTH;
+        customQueryParametersArea = new JTextArea();
+        customQueryParametersArea.setPreferredSize(new Dimension(300, 100));
+        panel.add(customQueryParametersArea, gbc);
+
         // Tags label
         gbc.gridwidth = 2;
         gbc.gridy++;
         panel.add(new JLabel("Tags"), gbc);
 
-        // Tags text are
+        // Tags text area
         gbc.gridy++;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
@@ -219,6 +233,7 @@ public class Main {
 
             final String url = getUrl();
             final String[] tags = getTags();
+            final Map<String, String> queryParams = getQueryParams();
             final Booru booru = new Booru(url);
 
             System.out.printf("Requesting with:%nURL: %s%nTags: %s%n", url, String.join(", ", tags));
@@ -228,7 +243,7 @@ public class Main {
                     return;
 
                 try {
-                    final Page page = booru.getPage(pageIndex, tags);
+                    final Page page = booru.getPage(pageIndex, 1000, queryParams, tags);
 
                     for (final Post post : page.posts()) {
                         if (!running)
@@ -316,6 +331,15 @@ public class Main {
         }
 
         return result.toArray(new String[0]);
+    }
+
+    private Map<String, String> getQueryParams() {
+        final String input = customQueryParametersArea.getText();
+
+        if (input.isBlank())
+            return Map.of();
+
+        return Utils.parsePair(input);
     }
 
 }
